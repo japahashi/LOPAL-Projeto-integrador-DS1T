@@ -40,11 +40,20 @@ public class TelaEstacionaFacil extends Application {
         carrosEstacionados.setPadding(new Insets(60, 300, 0,300));
 
         Button entrada = new Button("Nova entrada");
+        entrada.setStyle("-fx-background-color: #FCA311;");
+        entrada.setPrefHeight(70);
+        entrada.setPrefWidth(170);
+
         Button saida = new Button("Registrar saida");
+        saida.setStyle("-fx-background-color: #14213D;");
+        saida.setStyle(saida.getStyle() + "; -fx-text-fill: white;");
+        saida.setPrefHeight(70);
+        saida.setPrefWidth(170);
 
         HBox boxButtons = new HBox();
         boxButtons.setSpacing(50);
-        boxButtons.setPadding(new Insets(30, 0, 0, 400));
+        boxButtons.setPadding(new Insets(30, 0, 30, 300));
+        boxButtons.setStyle("-fx-fill-color: #FCA311;");
 
         Pane panebuttons = new Pane();
         panebuttons.setPadding(new Insets(0, 0, 0, 0));
