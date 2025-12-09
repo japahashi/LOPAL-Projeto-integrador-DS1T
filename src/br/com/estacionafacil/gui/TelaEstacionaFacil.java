@@ -31,7 +31,7 @@ public class TelaEstacionaFacil extends Application {
         header.setPrefHeight(85);
 
         Label labelTitulo = new Label("Estaciona Facil");
-        labelTitulo.setStyle("-fx-text-fill: black;-fx-font-size: 25;-fx-font-weight: bold;");
+        labelTitulo.setStyle("-fx-text-fill: black;-fx-font-size: 25;");
         labelTitulo.setPadding(new Insets(25, 0, 0,40));
 
         Label labelSubtitulo = new Label("Gestão de estacionamentos");
@@ -41,9 +41,15 @@ public class TelaEstacionaFacil extends Application {
         TableView<EstacionaFacil> carrosEstacionados = new TableView<>();
         carrosEstacionados.setPadding(new Insets(60, 300, 0,300));
 
-        TableColumn<EstacionaFacil, String> placaColuna = new TableColumn<>("Placa");
-        TableColumn<EstacionaFacil, String> entradaColuna = new TableColumn<>("Data e hora de entrada");
-        carrosEstacionados.getColumns().addAll(placaColuna, entradaColuna);
+        TableColumn<EstacionaFacil, String> placaDoCarro = new TableColumn<>("Placa");
+        TableColumn<EstacionaFacil, String> horarioDeEntrada = new TableColumn<>("Hora de entrada");
+        TableColumn<EstacionaFacil, String> dataDeEntrada = new TableColumn<>("Data de entrada");
+        TableColumn<EstacionaFacil, String> modeloDoCarro = new TableColumn<>("Modelo do carro");
+        placaDoCarro.setPrefWidth(80);
+        horarioDeEntrada.setPrefWidth(115);
+        dataDeEntrada.setPrefWidth(115);
+        modeloDoCarro.setPrefWidth(105);
+        carrosEstacionados.getColumns().addAll(placaDoCarro, horarioDeEntrada, dataDeEntrada, modeloDoCarro);
 
         Button entrada = new Button("Nova entrada");
         entrada.setStyle("-fx-background-color: #FCA311; -fx-text-fill: black;");
@@ -57,20 +63,12 @@ public class TelaEstacionaFacil extends Application {
 
         entrada.setOnAction(e -> {
             TelaEntrada tela = new TelaEntrada();
-            try {
-                tela.start(new Stage());
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            stage.setScene(tela.telaEntrada(stage));
         });
 
         saida.setOnAction(e -> {
             TelaSaida tela = new TelaSaida();
-            try {
-                tela.start(new Stage());
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            stage.setScene(tela.telaSaida(stage));
         });
 
         HBox boxButtons = new HBox();
