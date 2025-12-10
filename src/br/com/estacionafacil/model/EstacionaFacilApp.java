@@ -1,4 +1,10 @@
 package br.com.estacionafacil.model;
 
-public class EstacionaFacil {
+public class EstacionaFacilApp {
+
+
+
+
+
+
 }

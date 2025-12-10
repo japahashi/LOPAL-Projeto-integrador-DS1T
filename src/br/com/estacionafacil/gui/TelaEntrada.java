@@ -46,7 +46,7 @@ public class TelaEntrada extends Stage {
 
         Button botaoConfirmarEntrada = new Button("Confirmar entrada");
         botaoConfirmarEntrada.setStyle("-fx-background-color: #FCA311; -fx-text-fill: black;");
-        botaoConfirmarEntrada.setPrefHeight(70);
+        botaoConfirmarEntrada.setPrefHeight(60);
         botaoConfirmarEntrada.setPrefWidth(170);
 
         VBox containerBotao = new VBox(botaoConfirmarEntrada);

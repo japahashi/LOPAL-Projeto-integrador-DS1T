@@ -1,6 +1,6 @@
 package br.com.estacionafacil.gui;
 
-import br.com.estacionafacil.model.EstacionaFacil;
+import br.com.estacionafacil.model.EstacionaFacilApp;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -38,13 +38,13 @@ public class TelaEstacionaFacil extends Application {
         labelSubtitulo.setPadding(new Insets(-5, 0, 20,40));
         header.getChildren().addAll(labelTitulo, labelSubtitulo);
 
-        TableView<EstacionaFacil> carrosEstacionados = new TableView<>();
+        TableView<EstacionaFacilApp> carrosEstacionados = new TableView<>();
         carrosEstacionados.setPadding(new Insets(60, 300, 0,300));
 
-        TableColumn<EstacionaFacil, String> placaDoCarro = new TableColumn<>("Placa");
-        TableColumn<EstacionaFacil, String> horarioDeEntrada = new TableColumn<>("Hora de entrada");
-        TableColumn<EstacionaFacil, String> dataDeEntrada = new TableColumn<>("Data de entrada");
-        TableColumn<EstacionaFacil, String> modeloDoCarro = new TableColumn<>("Modelo do carro");
+        TableColumn<EstacionaFacilApp, String> placaDoCarro = new TableColumn<>("Placa");
+        TableColumn<EstacionaFacilApp, String> horarioDeEntrada = new TableColumn<>("Hora de entrada");
+        TableColumn<EstacionaFacilApp, String> dataDeEntrada = new TableColumn<>("Data de entrada");
+        TableColumn<EstacionaFacilApp, String> modeloDoCarro = new TableColumn<>("Modelo do carro");
         placaDoCarro.setPrefWidth(80);
         horarioDeEntrada.setPrefWidth(115);
         dataDeEntrada.setPrefWidth(115);
@@ -77,15 +77,6 @@ public class TelaEstacionaFacil extends Application {
         boxButtons.setStyle("-fx-fill-color: #FCA311;");
         boxButtons.setAlignment(Pos.CENTER);
         boxButtons.getChildren().addAll(entrada,saida);
-
-
-
-
-
-
-
-
-
 
         root.getChildren().add(header);
         root.getChildren().add(carrosEstacionados);
