@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -29,11 +28,11 @@ public class TelaEntrada extends Stage {
         GridPane gridFormulario = new GridPane();
         gridFormulario.setVgap(20);
         gridFormulario.setHgap(10);
-        gridFormulario.setPadding(new Insets(150, 0, 10, 30));
+        gridFormulario.setPadding(new Insets(120, 0, 10, 350));
 
         Label labelPlaca = new Label("Placa do veìculo");
         TextField textFieldPlaca = new TextField();
-        Label labelModeloCarro = new Label("Modelo do carro");
+        Label labelModeloCarro = new Label("Modelo do veìculo");
         TextField textFieldModeloCarro = new TextField();
         Label labelNomeProprietario = new Label("Nome do proprietario");
         TextField textFieldNomeProprietario = new TextField();
@@ -50,11 +49,12 @@ public class TelaEntrada extends Stage {
         botaoConfirmarEntrada.setPrefHeight(70);
         botaoConfirmarEntrada.setPrefWidth(170);
 
-
+        VBox containerBotao = new VBox(botaoConfirmarEntrada);
+        containerBotao.setAlignment(Pos.CENTER);
+        containerBotao.setPadding(new Insets(80, 0, 0, 0));
 
         root.getChildren().add(header);
-        root.getChildren().add(gridFormulario);
-        root.getChildren().add(botaoConfirmarEntrada);
+        root.getChildren().addAll(gridFormulario, containerBotao);
 
         return new Scene(root, 1030, 600);
 
