@@ -1,5 +1,7 @@
 package br.com.estacionafacil.gui;
 
+import br.com.estacionafacil.model.EntradaVeiculo;
+import br.com.estacionafacil.model.EstacionaFacilApp;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -48,6 +50,18 @@ public class TelaEntrada extends Stage {
         botaoConfirmarEntrada.setStyle("-fx-background-color: #FCA311; -fx-text-fill: black;");
         botaoConfirmarEntrada.setPrefHeight(60);
         botaoConfirmarEntrada.setPrefWidth(170);
+
+        botaoConfirmarEntrada.setOnAction( e ->{
+            String placa = textFieldPlaca.getText();
+            String modelo = textFieldModeloCarro.getText();
+            String proprietario = textFieldNomeProprietario.getText();
+
+            try{
+                EntradaVeiculo veiculo = EstacionaFacilApp.registrarEntrada(placa,modelo, proprietario);
+
+            }
+        });
+
 
         VBox containerBotao = new VBox(botaoConfirmarEntrada);
         containerBotao.setAlignment(Pos.CENTER);
