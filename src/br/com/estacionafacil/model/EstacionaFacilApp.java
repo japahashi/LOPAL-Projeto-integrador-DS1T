@@ -20,7 +20,7 @@ public class EstacionaFacilApp {
         return veiculo;
     }
 
-    public static double RegistrarSaida(String placa) throws Exception {
+    public static double registrarSaida(String placa) throws Exception {
         EntradaVeiculo veiculoEcontrado = null;
 
         for (EntradaVeiculo veiculo : veiculosAtivos) {

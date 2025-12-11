@@ -1,5 +1,6 @@
 package br.com.estacionafacil.gui;
 
+import br.com.estacionafacil.model.EntradaVeiculo;
 import br.com.estacionafacil.model.EstacionaFacilApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,8 +25,8 @@ public class TelaSaida extends Stage {
         labelTitulo.setPadding(new Insets(25, 0, 0,40));
         header.getChildren().add(labelTitulo);
 
-        ComboBox<EstacionaFacilApp> carrosNoEstacionameto = new ComboBox<>();
-        ObservableList<EstacionaFacilApp> listaDeCarros = FXCollections.observableArrayList();
+        ComboBox<EntradaVeiculo> carrosNoEstacionameto = new ComboBox<>();
+        ObservableList<EntradaVeiculo> listaDeCarros = FXCollections.observableArrayList();
         carrosNoEstacionameto.setItems(listaDeCarros);
         carrosNoEstacionameto.setPromptText("Selecione um carro");
 
@@ -41,12 +42,36 @@ public class TelaSaida extends Stage {
 
         carrosEstacionados.getColumns().addAll(tempoDePermanecia, valorAPagar);
 
+        VBox containerBotao = new VBox(10);
+
+        Button voltar = new Button("Voltar");
+        voltar.setStyle("-fx-background-color: #14213D; -fx-text-fill: white;");
+        voltar.setPrefHeight(40);
+        voltar.setPrefWidth(150);
+
+
+
+
         Button botaoConfirmarSaida = new Button("Confirmar pagamento/sáida");
         botaoConfirmarSaida.setStyle("-fx-background-color: #FCA311; -fx-text-fill: black;");
         botaoConfirmarSaida.setPrefHeight(60);
         botaoConfirmarSaida.setPrefWidth(170);
 
-        VBox containerBotao = new VBox(botaoConfirmarSaida);
+
+        botaoConfirmarSaida.setOnAction( e -> {
+            EntradaVeiculo selecionado = carrosNoEstacionameto.getSelectionModel().getSelectedItem();
+            if (selecionado != null){
+                try{
+                    double valor = EstacionaFacilApp.registrarSaida(selecionado.getPlaca());
+                    System.out.println("Valor a pagar: R$ " + valor);
+                    carrosNoEstacionameto.getItems().setAll(EstacionaFacilApp.getVeiculosAtivos());
+                } catch (Exception exception){
+                    System.out.println(" Erro: " + exception.getMessage());
+                }
+            }
+        });
+
+        containerBotao.getChildren().addAll(botaoConfirmarSaida, voltar);
         containerBotao.setAlignment(Pos.CENTER);
         containerBotao.setPadding(new Insets(0, 0, 0, 0));
 

@@ -58,7 +58,14 @@ public class TelaEntrada extends Stage {
 
             try{
                 EntradaVeiculo veiculo = EstacionaFacilApp.registrarEntrada(placa,modelo, proprietario);
+                System.out.println("Veículo cadastrado: " + veiculo.getPlaca());
 
+                textFieldPlaca.clear();
+                textFieldModeloCarro.clear();
+                textFieldNomeProprietario.clear();
+
+            } catch (Exception exception){
+                System.out.println("Erro: " + exception.getMessage());
             }
         });
 
