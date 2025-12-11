@@ -40,7 +40,8 @@ public class TelaSaida extends Stage {
         tempoDePermanecia.setPrefWidth(200);
         valorAPagar.setPrefWidth(230);
 
-        carrosEstacionados.getColumns().addAll(tempoDePermanecia, valorAPagar);
+        //carrosEstacionados.getColumns().addAll(tempoDePermanecia, valorAPagar);
+        carrosNoEstacionameto.getItems().setAll(EstacionaFacilApp.getVeiculosAtivos());
 
         VBox containerBotao = new VBox(10);
 
@@ -48,6 +49,13 @@ public class TelaSaida extends Stage {
         voltar.setStyle("-fx-background-color: #14213D; -fx-text-fill: white;");
         voltar.setPrefHeight(40);
         voltar.setPrefWidth(150);
+
+
+
+        voltar.setOnAction(e -> {
+            TelaEstacionaFacil tela = new TelaEstacionaFacil();
+            tela.start(stage);
+        });
 
 
 

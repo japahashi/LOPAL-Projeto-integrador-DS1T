@@ -1,7 +1,9 @@
 package br.com.estacionafacil.gui;
 
+import br.com.estacionafacil.model.EntradaVeiculo;
 import br.com.estacionafacil.model.EstacionaFacilApp;
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,8 +17,8 @@ import javafx.stage.Stage;
 
 public class TelaEstacionaFacil extends Application {
 
-
-    public void start(Stage stage) throws Exception {
+    @Override
+    public void start(Stage stage) {
 
         VBox root = new VBox();
         Scene scene = new Scene(root);
@@ -26,6 +28,7 @@ public class TelaEstacionaFacil extends Application {
         stage.setWidth(1030);
         stage.setHeight(600);
 
+        // HEADER
         VBox header = new VBox();
         header.setStyle("-fx-background-color: #FCA311;");
         header.setPrefHeight(85);
@@ -38,19 +41,34 @@ public class TelaEstacionaFacil extends Application {
         labelSubtitulo.setPadding(new Insets(-5, 0, 20,40));
         header.getChildren().addAll(labelTitulo, labelSubtitulo);
 
-        TableView<EstacionaFacilApp> carrosEstacionados = new TableView<>();
-        carrosEstacionados.setPadding(new Insets(60, 300, 0,300));
+        // TABELA
+        TableView<EntradaVeiculo> tabela = new TableView<>();
+        tabela.setPadding(new Insets(60, 300, 0,300));
 
-        TableColumn<EstacionaFacilApp, String> placaDoCarro = new TableColumn<>("Placa");
-        TableColumn<EstacionaFacilApp, String> horarioDeEntrada = new TableColumn<>("Hora de entrada");
-        TableColumn<EstacionaFacilApp, String> dataDeEntrada = new TableColumn<>("Data de entrada");
-        TableColumn<EstacionaFacilApp, String> modeloDoCarro = new TableColumn<>("Modelo do carro");
-        placaDoCarro.setPrefWidth(80);
-        horarioDeEntrada.setPrefWidth(115);
-        dataDeEntrada.setPrefWidth(115);
-        modeloDoCarro.setPrefWidth(105);
-        carrosEstacionados.getColumns().addAll(placaDoCarro, horarioDeEntrada, dataDeEntrada, modeloDoCarro);
+        TableColumn<EntradaVeiculo, String> placa = new TableColumn<>("Placa");
+        placa.setPrefWidth(80);
+        placa.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getPlaca()));
 
+        TableColumn<EntradaVeiculo, String> horaEntrada = new TableColumn<>("Hora de entrada");
+        horaEntrada.setPrefWidth(115);
+        horaEntrada.setCellValueFactory(c ->
+                new SimpleStringProperty(c.getValue().getHoraEntrada().toLocalTime().toString())
+        );
+
+        TableColumn<EntradaVeiculo, String> dataEntrada = new TableColumn<>("Data de entrada");
+        dataEntrada.setPrefWidth(115);
+        dataEntrada.setCellValueFactory(c ->
+                new SimpleStringProperty(c.getValue().getHoraEntrada().toLocalDate().toString())
+        );
+
+        TableColumn<EntradaVeiculo, String> modelo = new TableColumn<>("Modelo do carro");
+        modelo.setPrefWidth(105);
+        modelo.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getModelo()));
+
+        tabela.getColumns().addAll(placa, horaEntrada, dataEntrada, modelo);
+        tabela.getItems().setAll(EstacionaFacilApp.getVeiculosAtivos());
+
+        // BOTÕES
         Button entrada = new Button("Nova entrada");
         entrada.setStyle("-fx-background-color: #FCA311; -fx-text-fill: black;");
         entrada.setPrefHeight(70);
@@ -71,24 +89,14 @@ public class TelaEstacionaFacil extends Application {
             stage.setScene(tela.telaSaida(stage));
         });
 
-        HBox boxButtons = new HBox();
-        boxButtons.setSpacing(50);
-        boxButtons.setPadding(new Insets(20, 0, 20, 0));
-        boxButtons.setStyle("-fx-fill-color: #FCA311;");
+        HBox boxButtons = new HBox(50, entrada, saida);
+        boxButtons.setPadding(new Insets(20,0,20,0));
         boxButtons.setAlignment(Pos.CENTER);
-        boxButtons.getChildren().addAll(entrada,saida);
 
-        root.getChildren().add(header);
-        root.getChildren().add(carrosEstacionados);
-        root.getChildren().add(boxButtons);
-
+        root.getChildren().addAll(header, tabela, boxButtons);
 
         stage.setScene(scene);
         stage.show();
-
-
-
-
-
     }
 }
+
