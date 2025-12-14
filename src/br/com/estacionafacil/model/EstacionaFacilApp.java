@@ -1,5 +1,7 @@
 package br.com.estacionafacil.model;
 
+import br.com.estacionafacil.repository.EstacionamentoRepository;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -7,31 +9,36 @@ import java.util.List;
 
 public class EstacionaFacilApp {
 
-    // Lista de veículos atualmente no estacionamento
+    // Lista de veículos atualmente estacionados
     private static List<EntradaVeiculo> veiculosAtivos = new ArrayList<>();
 
-    // Metodo para registrar entrada de veículo
+    // Registra a entrada de um veículo
     public static EntradaVeiculo registrarEntrada(String placa, String modelo, String proprietario) throws Exception {
-        // Verifica se o veículo já está na lista
-        for (EntradaVeiculo veiculo : veiculosAtivos) {
-            if (veiculo.getPlaca().equalsIgnoreCase(placa)) {
+
+        // Verifica duplicidade
+        for (EntradaVeiculo v : veiculosAtivos) {
+            if (v.getPlaca().equalsIgnoreCase(placa)) {
                 throw new Exception("Veículo já está no estacionamento!");
             }
         }
 
         EntradaVeiculo veiculo = new EntradaVeiculo(placa, modelo, proprietario);
-        veiculosAtivos.add(veiculo); // Adiciona à lista
+        veiculosAtivos.add(veiculo);
+
+        // Salva no CSV de veículos ativos
+        EstacionamentoRepository.salvarEntrada(veiculo);
+
         return veiculo;
     }
 
-    // Metodo para registrar saída do veículo
+    // Registra a saída do veículo
     public static double registrarSaida(String placa) throws Exception {
+
         EntradaVeiculo veiculoEncontrado = null;
 
-        // Procura veículo na lista
-        for (EntradaVeiculo veiculo : veiculosAtivos) {
-            if (veiculo.getPlaca().equalsIgnoreCase(placa)) {
-                veiculoEncontrado = veiculo;
+        for (EntradaVeiculo v : veiculosAtivos) {
+            if (v.getPlaca().equalsIgnoreCase(placa)) {
+                veiculoEncontrado = v;
                 break;
             }
         }
@@ -41,35 +48,36 @@ public class EstacionaFacilApp {
         }
 
         LocalDateTime saida = LocalDateTime.now();
-        // Marca hora de saída
         veiculoEncontrado.setHoraSaida(saida);
 
-        // Calcula tempo total em minutos
         long minutos = Duration.between(veiculoEncontrado.getHoraEntrada(), saida).toMinutes();
         long horasPagas = 1;
 
         if (minutos > 60) {
             long extra = minutos - 60;
             horasPagas += extra / 60;
-
-            if (extra % 60 >= 5) { // Arredonda se exceder 5 minutos
-                horasPagas++;
-            }
+            if (extra % 60 >= 5) horasPagas++;
         }
 
-        double valor = 10 + (horasPagas - 1) * 5; // Valor total
+        double valor = 10 + (horasPagas - 1) * 5;
+        veiculoEncontrado.setValorPagar(valor);
 
-        veiculoEncontrado.setValorPagar(valor); // Salva valor no objeto
+        // Salva no histórico
+        EstacionamentoRepository.salvarHistorico(veiculoEncontrado);
 
-        veiculosAtivos.remove(veiculoEncontrado); // Remove veículo da lista
+        // Remove do CSV de ativos
+        EstacionamentoRepository.removerVeiculoAtivo(placa);
+
+        // Remove da lista em memória
+        veiculosAtivos.remove(veiculoEncontrado);
 
         return valor;
     }
 
-    // Retorna lista de veículos ativos
     public static List<EntradaVeiculo> getVeiculosAtivos() {
         return veiculosAtivos;
     }
 }
+
 
 

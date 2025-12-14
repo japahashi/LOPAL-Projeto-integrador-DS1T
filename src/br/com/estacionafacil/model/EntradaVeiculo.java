@@ -13,18 +13,16 @@ public class EntradaVeiculo {
     private LocalDateTime horaSaida;
     private Double valorPagar;
 
-    // Formato de data/hora para exibição
+    // Formato padrão de data e hora
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-    // Construtor
+    // Construtor chamado no momento da entrada
     public EntradaVeiculo(String placa, String modelo, String proprietario) {
         this.placa = placa;
         this.modelo = modelo;
         this.proprietario = proprietario;
-        // Hora de entrada = momento atual
         this.horaEntrada = LocalDateTime.now();
-        // Inicialmente nulo
         this.valorPagar = null;
     }
 
@@ -36,27 +34,30 @@ public class EntradaVeiculo {
     public LocalDateTime getHoraSaida() { return horaSaida; }
 
     // Setter da hora de saída
-    public void setHoraSaida(LocalDateTime horaSaida) { this.horaSaida = horaSaida; }
+    public void setHoraSaida(LocalDateTime horaSaida) {
+        this.horaSaida = horaSaida;
+    }
 
-    // Formata hora de entrada
-    public String getHoraEntradaFormatada() { return horaEntrada.format(FORMATTER); }
+    // Setter e getter do valor
+    public void setValorPagar(double valor) {
+        this.valorPagar = valor;
+    }
 
-    // Formata hora de saída
+    public Double getValorPagar() {
+        return valorPagar;
+    }
+
+    // Formata data/hora
+    public String getHoraEntradaFormatada() {
+        return horaEntrada.format(FORMATTER);
+    }
+
     public String getHoraSaidaFormatada() {
         if (horaSaida == null) return "";
         return horaSaida.format(FORMATTER);
     }
-
-    // Setter e getter do valor a pagar
-    public void setValorPagar(double valor) { this.valorPagar = valor; }
-    public Double getValorPagar() { return valorPagar; }
-
-    // Formata valor para exibição
-    public String getValorFormatado() {
-        if (valorPagar == null) return "";
-        return "R$ " + String.format("%.2f", valorPagar);
-    }
 }
+
 
 
 
