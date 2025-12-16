@@ -1,4 +1,9 @@
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/6455f591-ad96-421f-b696-94c5dc87d91c" alt="Image1" height="500">
+</p>
+
 # Projeto Integrador – Lógica de Programação e Algoritmos (LOPAL)
+
 ## 1º Semestre | SENAI Jandira
 
 Este repositório reúne os **códigos, algoritmos e registros desenvolvidos na disciplina de LOPAL – Lógica de Programação e Algoritmos**, como parte do **Projeto Integrador do 1º semestre** do curso **Técnico em Desenvolvimento de Sistemas** do **SENAI Jandira**.
@@ -95,5 +100,6 @@ cd lopal
 ## 📝 Considerações Finais
 
 Este repositório possui finalidade **exclusivamente educacional**, sendo destinado ao registro das atividades realizadas na disciplina de **LOPAL – Lógica de Programação e Algoritmos**, integrante do **Projeto Integrador do 1º semestre** do curso Técnico em Desenvolvimento de Sistemas do **SENAI Jandira**.
+
 
 
