@@ -3,7 +3,7 @@
 
 Este repositório reúne os **códigos, algoritmos e registros desenvolvidos na disciplina de LOPAL – Lógica de Programação e Algoritmos**, como parte do **Projeto Integrador do 1º semestre** do curso **Técnico em Desenvolvimento de Sistemas** do **SENAI Jandira**.
 
-A disciplina de LOPAL é responsável por estruturar a lógica do sistema **[NOME DO SISTEMA]**, transformando os requisitos levantados na disciplina de LER em algoritmos capazes de representar o comportamento e as regras de funcionamento do software.
+A disciplina de LOPAL é responsável por estruturar a lógica do sistema **Estaciona Fácil**, transformando os requisitos levantados na disciplina de LER em algoritmos capazes de representar o comportamento e as regras de funcionamento do software.
 
 
 ## 🎯 Objetivo da Disciplina
@@ -21,9 +21,8 @@ Durante o desenvolvimento desta disciplina, foram aplicados os seguintes conceit
 
 - Variáveis, constantes e tipos de dados  
 - Operadores lógicos e aritméticos  
-- Estruturas condicionais (if / else / switch)  
-- Estruturas de repetição (for / while / do while)  
-- Vetores e matrizes  
+- Estruturas condicionais  
+- Estruturas de repetição  
 - Funções e procedimentos  
 - Lógica aplicada aos fluxos do sistema  
 
@@ -96,4 +95,5 @@ cd lopal
 ## 📝 Considerações Finais
 
 Este repositório possui finalidade **exclusivamente educacional**, sendo destinado ao registro das atividades realizadas na disciplina de **LOPAL – Lógica de Programação e Algoritmos**, integrante do **Projeto Integrador do 1º semestre** do curso Técnico em Desenvolvimento de Sistemas do **SENAI Jandira**.
+
 
